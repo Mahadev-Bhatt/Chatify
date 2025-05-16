@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chatify - Welcome</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- AOS Library CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --fg: #1f2937;
+      --card-bg: #ffffff;
+      --card-fg: #374151;
+      --button-bg: #3b82f6;
+      --button-text: white;
+    }
+
+    body.dark {
+      --bg: #1f2937;
+      --fg: #f3f4f6;
+      --card-bg: #374151;
+      --card-fg: #e5e7eb;
+      --button-bg: #2563eb;
+      --button-text: #f3f4f6;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      color: var(--card-fg);
+      border-radius: .5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      padding: 1rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    a.button {
+      display: inline-block;
+      background: var(--button-bg);
+      color: var(--button-text);
+      padding: .5rem 1rem;
+      border-radius: .375rem;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    body.dark a.button {
+      background: #2563eb;
+    }
+
+    button#darkModeToggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    body.dark button#darkModeToggle {
+      color: #f3f4f6;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+<div class="min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <header class="bg-white shadow" data-aos="fade-down" data-aos-delay="300">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-gray-800">💬 Chatify</h1>
+      <nav class="flex items-center space-x-4">
+        <a href="/login" class="text-gray-600 hover:text-blue-600" data-aos="fade-right">Login</a>
+        <a href="/signup" class="text-gray-600 hover:text-blue-600" data-aos="fade-left" data-aos-delay="100">Sign Up</a>
+        <button id="darkModeToggle" class="text-gray-600 hover:text-blue-600">
+          🌙
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="flex-grow container mx-auto px-6 py-20 text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Welcome to Chatify</h2>
+    <p class="text-lg text-gray-600 mb-6" data-aos="fade-up" data-aos-delay="100">
+      Real-time chat with friends, chatrooms, and more.
+    </p>
+    <a href="/signup"
+       class="button"
+       data-aos="zoom-in" data-aos-delay="200">
+      Get Started
+    </a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="bg-white py-12">
+    <div class="container mx-auto px-6">
+      <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center" data-aos="fade-up">Features</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card" data-aos="flip-left" data-aos-delay="100">
+          <h4 class="font-semibold text-lg mb-2">🧑‍🤝‍🧑 Chat Rooms</h4>
+          <p class="text-gray-600">Join public or private rooms and talk with anyone.</p>
+        </div>
+        <div class="card" data-aos="flip-up" data-aos-delay="200">
+          <h4 class="font-semibold text-lg mb-2">🔐 Secure Login</h4>
+          <p class="text-gray-600">Sign up and login with encrypted credentials.</p>
+        </div>
+        <div class="card" data-aos="flip-right" data-aos-delay="300">
+          <h4 class="font-semibold text-lg mb-2">⚡ Real-Time</h4>
+          <p class="text-gray-600">Instant message delivery using WebSockets and STOMP.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-200 text-center py-4 text-sm text-gray-600" data-aos="fade-up" data-aos-delay="400">
+    &copy; 2025 Chatify. All rights reserved.
+  </footer>
+</div>
+
+<!-- AOS Library JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({
+    easing: 'ease-in-out',
+    duration: 1200,
+    once: true // Makes sure the animation happens only once
+  });
+
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  // Check if dark mode was previously set and apply it
+  if (localStorage.getItem('dark') === 'on') {
+    document.body.classList.add('dark');
+  }
+
+  // Toggle dark mode on button click
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    // Save the preference in localStorage
+    if (document.body.classList.contains('dark')) {
+      localStorage.setItem('dark', 'on');
+    } else {
+      localStorage.setItem('dark', 'off');
+    }
+  });
+</script>
+
+</body>
+</html>

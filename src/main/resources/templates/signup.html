@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .bg-custom {
+      background-color: #f8f9fa;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .form-heading {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="bg-custom">
+
+<div class="container mt-5">
+  <div class="form-container">
+    <h2 class="form-heading text-center">Create Your Account</h2>
+
+    <!-- Displaying success or error messages -->
+    <div th:if="${error}" class="alert alert-danger">
+      <span th:text="${error}"></span>
+    </div>
+    <div th:if="${message}" class="alert alert-success">
+      <span th:text="${message}"></span>
+    </div>
+
+    <!-- Sign-Up Form -->
+    <form th:action="@{/signup}" method="post" autocomplete="off">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+      </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" required placeholder="Enter your username">
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required placeholder="Create a password">
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required placeholder="Confirm your password">
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+      </div>
+
+      <p class="text-center mt-3">
+        Already have an account? <a href="/login">Log in here</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
