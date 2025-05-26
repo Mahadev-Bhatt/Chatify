@@ -1,5 +1,5 @@
 # Use a suitable base image with Java and Maven
-FROM maven:3.9.5-jdk-21-alpine
+FROM apache/maven:3.9.5-jdk-21
 
 # Set the working directory in the container
 WORKDIR /app
