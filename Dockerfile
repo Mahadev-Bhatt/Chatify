@@ -1,29 +1,24 @@
-# Use a suitable base image with Java and Maven
-FROM maven:3.9.6-eclipse-temurin-21
+# First stage: build the JAR with Maven
+eclipse-temurin:21-jre-alpine
 
-
-
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml and source code
+# Copy pom.xml and source code
 COPY pom.xml .
 COPY src ./src
 
-# Package the application (skip tests for faster build in Docker)
+# Build the application, skipping tests for faster build
 RUN mvn clean package -DskipTests
 
-# Use a lightweight base image for running the JAR
+# Second stage: run the application with lightweight JRE
 FROM eclipse-temurin:21-jre-alpine
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the built JAR from the previous stage
-COPY --from=0 /app/target/*.jar app.jar
+# Copy the JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port your Spring Boot app runs on (default is 8080)
 EXPOSE 8080
 
-# Command to run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
