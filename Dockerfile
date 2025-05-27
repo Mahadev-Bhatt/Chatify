@@ -1,5 +1,6 @@
 # Use a suitable base image with Java and Maven
-FROM maven:3.9.6-eclipse-temurin-17
+FROM maven:3.9.6-eclipse-temurin-21
+
 
 
 # Set the working directory in the container
